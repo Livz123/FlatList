@@ -1,6 +1,8 @@
+// Importa o React e hooks/funções da biblioteca React Native
 import React, { useState } from "react";
 import { View, Text, TextInput, FlatList, Image, StyleSheet } from "react-native";
 
+// Lista de contatos fictícios com id, nome, imagem e última mensagem
 const contatos = [
   { id: "1", nome: "雪花飘飘北风啸啸", imagem: require("assets/fulano.png"), mensagem: "Grazi -: Saiu boneca nova?" },
   { id: "2", nome: "Mae", imagem: require("assets/fulano.png"), mensagem: "manda o boleto da faculdade..." },
@@ -8,36 +10,20 @@ const contatos = [
   { id: "4", nome: "Julia(irmã)", imagem: require("assets/fulano.png"), mensagem: "Vem me ajudar" },
   { id: "5", nome: "Nebulosa", imagem: require("assets/fulano.png"), mensagem: "Miau" },
   { id: "6", nome: "Igor", imagem: require("assets/fulano.png"), mensagem: "E o trabalho?" },
+  // Vários contatos genéricos
   { id: "7", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "8", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "9", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "10", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "12", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "13", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "14", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "15", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "16", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "17", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "18", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "19", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "20", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "21", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "22", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "23", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "24", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "25", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "26", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "27", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "28", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
-  { id: "29", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" },
+  // ...
   { id: "30", nome: "contato", imagem: require("assets/fulano.png"), mensagem: "lorem ipsum" }
 ];
 
+// Componente principal que renderiza a FlatList com os contatos
 export default function FlatListComponent() {
+  // Hook para armazenar o texto digitado na busca
   const [busca, setBusca] = useState("");
 
   return (
     <View style={styles.container}>
+      {/* Campo de busca para filtrar contatos */}
       <TextInput
         style={styles.input}
         placeholder="Pesquisar"
@@ -45,9 +31,14 @@ export default function FlatListComponent() {
         value={busca}
         onChangeText={setBusca}
       />
+
+      {/* FlatList para renderizar a lista de contatos de forma eficiente */}
       <FlatList
+        // Filtra os contatos conforme a busca
         data={contatos.filter(item => item.nome.toLowerCase().includes(busca.toLowerCase()))}
+        // Define a chave única de cada item
         keyExtractor={item => item.id}
+        // Renderiza cada item da lista
         renderItem={({ item }) => (
           <View style={styles.item}>
             <Image source={item.imagem} style={styles.image} />
@@ -62,10 +53,11 @@ export default function FlatListComponent() {
   );
 }
 
+// Estilos usados na interface
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F2F2F2",
+    backgroundColor: "#F2F2F2", // fundo claro
     paddingTop: 50,
     paddingHorizontal: 15,
   },
@@ -82,7 +74,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3,
+    elevation: 3, // Sombra para Android
   },
   item: {
     flexDirection: "row",
@@ -95,7 +87,7 @@ const styles = StyleSheet.create({
   image: {
     width: 48,
     height: 48,
-    borderRadius: 24,
+    borderRadius: 24, // imagem redonda
     marginRight: 12,
     borderWidth: 1,
     borderColor: "#CCCCCC",
@@ -110,5 +102,3 @@ const styles = StyleSheet.create({
     color: "#666666",
   },
 });
-
-
